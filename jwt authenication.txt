@@ -1,0 +1,24 @@
+jwt authenication
+
+Session based authentication - idea is to store in backend server to track if user is logged in or logged out
+
+JWT - it's stateless, there is nothing at database or in api there is no information about whether a user is logged in or logged out 
+Token in stored on client/ front end
+
+step1: client will login with username/email + password
+step2: verify credentials, if valid create JWT token at backend
+step3: send response to client with token. now client can start accessing resources that require authentication 
+step4: if client wants to access resource that requires authentication he will send a request to /posts end point but also provide token in the header of the request
+step5: fast api will verify if token is valid, if valid it will send back the data
+
+JWT Token (it is not encrypted):
+
+made of three things
+
+1. header: it includes metadat about the token, we are going to sign/ hash the token eg using sha256, it is mentioned in token
+
+2. payload: you can send any piece of info in the payload, be careful as token itself is not encrypted, so dont put confidential details. common data in payload is user id, or user role
+
+3. signature: is a combination of three things header, payload and secret. secret contains special password on api. we take this info and pass it to the signing algorithm HS 256, and returns signature, it is important because we use it to determine if the token is valid.
+Signature is for data validaty
+
